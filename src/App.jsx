@@ -2,57 +2,46 @@ import React, { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [currentPage, setCurrentPage] = useState("home");
+  const [showProductList, setShowProductList] = useState(false);
 
-  const goToHome = () => setCurrentPage("home");
-  const goToProducts = () => setCurrentPage("products");
-  const goToCart = () => setCurrentPage("cart");
+  const handleGetStartedClick = () => {
+    setShowProductList(true);
+  };
 
   return (
-    <div>
-      {currentPage === "home" && (
+    <div className="app">
+      {!showProductList ? (
         <section className="landing-page">
           <div className="landing-content">
             <h1>Paradise Nursery</h1>
             <p>
               Welcome to Paradise Nursery, your online destination for beautiful
-              houseplants. Discover aromatic, medicinal, decorative, and
-              air-purifying plants to bring freshness and natural beauty into
-              your home.
+              houseplants. Browse our collection of aromatic, medicinal,
+              decorative, and air-purifying plants for your home and office.
             </p>
-            <button className="get-started-btn" onClick={goToProducts}>
+            <button className="get-started-btn" onClick={handleGetStartedClick}>
               Get Started
             </button>
           </div>
         </section>
-      )}
+      ) : (
+        <section className="products-page">
+          <nav className="navbar">
+            <h2>Paradise Nursery</h2>
+            <div>
+              <a href="#home">Home</a>
+              <a href="#plants">Plants</a>
+              <a href="#cart">Cart</a>
+            </div>
+          </nav>
 
-      {currentPage !== "home" && (
-        <nav className="navbar">
-          <h2>Paradise Nursery</h2>
-          <div>
-            <button onClick={goToHome}>Home</button>
-            <button onClick={goToProducts}>Plants</button>
-            <button onClick={goToCart}>Cart</button>
+          <div className="products-intro">
+            <h1>Plant Products</h1>
+            <p>
+              Select your favourite plants and add them to your shopping cart.
+            </p>
           </div>
-        </nav>
-      )}
-
-      {currentPage === "products" && (
-        <main className="products-page">
-          <h1>Plant Products</h1>
-          <p>
-            Browse our plant collection and add your favourite houseplants to
-            your cart.
-          </p>
-        </main>
-      )}
-
-      {currentPage === "cart" && (
-        <main className="cart-page">
-          <h1>Shopping Cart</h1>
-          <p>Your selected plants will appear here.</p>
-        </main>
+        </section>
       )}
     </div>
   );
