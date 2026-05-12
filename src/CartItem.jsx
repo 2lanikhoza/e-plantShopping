@@ -19,6 +19,8 @@ function CartItem() {
   const decreaseQuantity = (item) => {
     if (item.quantity > 1) {
       dispatch(updateQuantity({ id: item.id, quantity: item.quantity - 1 }));
+    } else {
+      dispatch(removeItem(item.id));
     }
   };
 
@@ -28,6 +30,10 @@ function CartItem() {
 
   const handleCheckout = () => {
     alert("Coming Soon");
+  };
+
+  const continueShopping = () => {
+    window.location.href = "#plants";
   };
 
   return (
@@ -63,10 +69,7 @@ function CartItem() {
         ))
       )}
 
-      <button onClick={() => (window.location.href = "#plants")}>
-        Continue Shopping
-      </button>
-
+      <button onClick={continueShopping}>Continue Shopping</button>
       <button onClick={handleCheckout}>Checkout</button>
     </div>
   );
